@@ -46,10 +46,13 @@
 
   var top = R.rows[0];
   function equationRows(r) {
+    var growthLabel = r.change_7d == null
+      ? '7-day change not reported (counted as 0%)'
+      : '7-day change ' + pct(r.change_7d);
     return [
       ['TVL', moneyFull(r.tvl_usd)],
       ['Band multiple (×' + r.band_multiple.toFixed(2) + ')', moneyFull(r.base_value_usd)],
-      ['7-day change ' + pct(r.growth_pct), '×' + r.growth_multiplier.toFixed(2)],
+      [growthLabel, '×' + r.growth_multiplier.toFixed(2)],
       ['Maturity (' + (r.age_days == null ? 'age unknown' : r.age_days + ' days') + ')', '×' + r.maturity_multiplier.toFixed(2)],
       ['Breadth (' + r.chains.length + (r.chains.length === 1 ? ' chain' : ' chains') + ')', '×' + r.breadth_multiplier.toFixed(2)],
     ];
