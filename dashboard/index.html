@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — pre-token protocols ranked by implied value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap masthead-in">
+    <div>
+      <p class="kicker">A radar for launches that do not exist yet</p>
+      <h1>Token Radar</h1>
+      <p class="lede">Every protocol that records no token, ranked by what its launch would be worth — and what to do about it before it happens.</p>
+    </div>
+    <dl class="mast-meta">
+      <div><dt>Snapshot</dt><dd id="asOf">—</dd></div>
+      <div><dt>Source</dt><dd>DefiLlama protocols</dd></div>
+      <div><dt>Model</dt><dd id="modelVersion">—</dd></div>
+    </dl>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="stats" id="stats" aria-label="Board facts"></section>
+
+  <section class="how" aria-label="How the value is worked out">
+    <div>
+      <h2>How the value is worked out</h2>
+      <p class="formula">implied value = TVL × band multiple × growth × maturity × breadth</p>
+      <p class="how-text">A launch is worth a fraction of the value locked in the protocol — and the fraction shrinks as the protocol gets bigger. Growth over the last seven days moves it up or down, a longer run with no token recorded moves it up, and running on more chains moves it up. Every number below comes from the snapshot itself; no protocol is ever special-cased by name.</p>
+    </div>
+    <div class="worked" id="worked" aria-label="Worked example"></div>
+  </section>
+
+  <nav class="tabs" aria-label="Views">
+    <button type="button" data-view="board" aria-pressed="true">Board</button>
+    <button type="button" data-view="live" aria-pressed="false">Live tokens</button>
+    <button type="button" data-view="model" aria-pressed="false">The model</button>
+  </nav>
+
+  <section id="view-board" class="view" aria-label="The board">
+    <div class="controls">
+      <label class="field grow">Search
+        <input type="search" id="q" placeholder="Name or slug…" autocomplete="off">
+      </label>
+      <label class="field">Category
+        <select id="cat"><option value="">All categories</option></select>
+      </label>
+      <label class="field">Chain
+        <select id="chain"><option value="">All chains</option></select>
+      </label>
+      <label class="field">Status
+        <select id="status">
+          <option value="">Watchlist + early</option>
+          <option value="watchlist">Watchlist only</option>
+          <option value="early">Early only</option>
+        </select>
+      </label>
+      <label class="field">Sort by
+        <select id="sort">
+          <option value="implied">Implied value</option>
+          <option value="tvl">TVL</option>
+          <option value="growth">7-day change</option>
+          <option value="age">Age</option>
+          <option value="name">Name</option>
+        </select>
+      </label>
+    </div>
+    <p class="count" id="count" role="status"></p>
+    <div class="panel">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Protocol</th>
+              <th scope="col" class="num">TVL</th>
+              <th scope="col" class="num">7d</th>
+              <th scope="col" class="num">Age</th>
+              <th scope="col" class="num">Chains</th>
+              <th scope="col" class="num">Implied value</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <p class="empty" id="empty" hidden>No protocol matches. Clear a filter and try again.</p>
+    </div>
+  </section>
+
+  <section id="view-live" class="view" hidden aria-label="Live tokens">
+    <p class="note">These protocols already trade. The market has priced them, so the board shows the market's own value — a market cap, not a model's guess. They are here so the radar's pre-token half can be checked against the market's real one.</p>
+    <div class="panel">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Protocol</th>
+              <th scope="col" class="num">TVL</th>
+              <th scope="col" class="num">Market cap</th>
+              <th scope="col" class="num">7d</th>
+            </tr>
+          </thead>
+          <tbody id="liveRows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-model" class="view" hidden aria-label="The model">
+    <div class="panel model-doc" id="modelDoc"></div>
+  </section>
+
+  <footer class="foot">
+    <p><strong>Read the words carefully.</strong> A protocol on this board <em>records no token</em> in the snapshot — that is DefiLlama's record, not proof it has none. The board does not predict whether or when a token is issued. Its implied value is this entry's own claim, never make.fun's, and never a price.</p>
+    <p>Farm plans are derived from each protocol's category, chains, TVL and age. Nothing here is financial advice; airdrops are never guaranteed, and a plan that asks you to pay to claim is a scam.</p>
+  </footer>
+</main>
+
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+  <div class="modal-card" id="modalCard"></div>
+</div>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
